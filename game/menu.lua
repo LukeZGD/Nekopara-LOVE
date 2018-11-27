@@ -272,7 +272,7 @@ end
 
 function menu_keypressed(key)
 	if key == 'down' then
-		sfx_sys[2]:play()
+		--sfx_sys[2]:play()
 		if m_selected <= menu_items-1 then
 			m_selected = m_selected + 1
 		else
@@ -281,7 +281,7 @@ function menu_keypressed(key)
 		m_select()
 		
 	elseif key == 'up' then
-		sfx_sys[2]:play()
+		--sfx_sys[2]:play()
 		if m_selected >= 3 then
 			m_selected = m_selected - 1
 		else

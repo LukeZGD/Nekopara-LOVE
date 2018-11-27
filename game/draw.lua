@@ -47,7 +47,7 @@ function fadeOut(x)
 end
 
 function drawTextBox()
-	if textbox_enabled and not menu_enabled then
+	if textbox_enabled and not menu_enabled and c_disp then
 		lg.setColor(255,255,255,alpha/2.5)
 		lg.draw(ui.window,0,520)
 		--shadow

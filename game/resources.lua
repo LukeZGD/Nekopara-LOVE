@@ -131,10 +131,10 @@ function audioUpdate(audiox, arg1) --audio changes
 			audio_bgm:setVolume(settings.bgmvol)
 			audio_bgm:play()
 		end
+		audio1 = audiox
 	elseif audiox == 'volchange' then
 		audio_bgm:setVolume(settings.bgmvol*arg1)
 	end
-	audio1 = audiox
 end
 
 function sfxplay(sfx) --sfx stuff
