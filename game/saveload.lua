@@ -5,7 +5,7 @@ bg1 = 'images/bk'
 audio1 = '0'
 cg1 = 'images/blank'
 ct = ''
-chapter = 0
+chapter = 1
 savevalue = ''
 savenumber = 1
 

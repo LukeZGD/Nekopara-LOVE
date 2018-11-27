@@ -253,6 +253,9 @@ function menu_confirm()
 		elseif m_selected == 7 then
 			savesettings()
 			audio_bgm:setVolume(settings.bgmvol)
+			sfx_sys[1]:setVolume(settings.sfxvol)
+			sfx_sys[2]:setVolume(settings.sfxvol)
+			sfx_sys[3]:setVolume(settings.sfxvol)
 			if sfxp then sfxp:setVolume(settings.sfxvol) end
 			if voice then voice:setVolume(settings.vocvol) end
 			menu_enable(menu_previous)

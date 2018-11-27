@@ -113,7 +113,7 @@ function ch1script()
 		pause(1.5)
 	elseif cl == 48 then
 		cw('Box',"Achoo!!")
-		audioUpdate('0')
+		audioUpdate('volchange',0.1)
 		voiceplay('ショコラ/syo_0001')
 	elseif cl == 49 then
 		bgUpdate('evimage.xp3/CG01b','bgco',0,-350)
@@ -190,21 +190,110 @@ function ch1script()
 	elseif cl == 72 then
 		cw('Kashou',"While I was getting ready to move, I did wonder why I didn't see you--")
 	elseif cl == 73 then
+		pause(1)
+		bgUpdate('evimage.xp3/CG01e','bgco',0,-110)
+	elseif cl == 74 then
+		sfxplay("seガタッと物音")
+		audioUpdate('volchange',0.2)
 		cw('Box2',"Achee!!")
 		voiceplay('バニラ/bani_0001')
-	elseif cl == 74 then
+	elseif cl == 75 then
+		bgUpdate('evimage.xp3/CG01e','bgco',-220,-300)
+		pause(1)
+	elseif cl == 76 then
 		cw('Box2',"Hmmm...")
 		voiceplay('バニラ/bani_0002')
-	elseif cl == 75 then
+	elseif cl == 77 then
 		cw('Kashou',"... Hey.")
-	elseif cl == 76 then
+	elseif cl == 78 then
+		sfxplay("seガタッと物音")
+		bgUpdate('evimage.xp3/CG01e','bgco',-220,-150)
+		pause(2)
+	elseif cl == 79 then
+		audioUpdate('volchange',1)
+		bgUpdate('evimage.xp3/CG01f','bgco',-220,-150)
 		cw('Vanilla',"Long time no see, Master.")
 		voiceplay('バニラ/bani_0003')
-	elseif cl == 70 then
-		cw('bl',"Or rather she preoccupied herself with only what was in front of her.")
-	elseif cl == 70 then
-		cw('bl',"Or rather she preoccupied herself with only what was in front of her.")
-	elseif cl == 70 then
-		cw('bl',"Or rather she preoccupied herself with only what was in front of her.")
+	elseif cl == 80 then
+		cw('Vanilla',"My nose was itchy because the inside of the moving truck was dusty.")
+		voiceplay('バニラ/bani_0004')
+	elseif cl == 81 then
+		bgUpdate('evimage.xp3/CG01f','bgco',-120,-100)
+		cw('Kashou',"Why is Vanilla here too...")
+	elseif cl == 82 then
+		cw('Vanilla',"Wherever Chocola is, I am too.")
+		voiceplay('バニラ/bani_0005')
+	elseif cl == 83 then
+		cw('Vanilla',"Besides, catgirls don't dislike tight spaces.")
+		voiceplay('バニラ/bani_0006')
+	elseif cl == 84 then
+		cw('Vanilla',"Also, they said \"This box is heavy, so be careful with it\" in regards to me too.")
+		voiceplay('バニラ/bani_0007')
+	elseif cl == 85 then
+		cw('Vanilla',"So I was also mad. Just steaming!")
+		voiceplay('バニラ/bani_0008')
+	elseif cl == 86 then
+		cw('Kashou',"Again, huh...")
+	elseif cl == 87 then
+		cw('Kashou',"In any case, Chocola, Vanilla, get out of there.")
+	elseif cl == 88 then
+		cw('bl',"I was at my wits' end with the large boxes that had suddenly shown up.")
+	elseif cl == 89 then
+		cw('bl',"Anyhow, Chocola and Vanilla got out of their boxes.")
+	elseif cl == 90 then
+		audioUpdate('0')
+		bgUpdate('images/bk')
+		pause(2)
+	elseif cl == 91 then
+		cgUpdate('data.xp3/rule/obi')
+		bgUpdate('data.xp3/bgimage/自宅リビング_昼','bgco',0,0)
+		audioUpdate('bgm_02')
+		cw('Kashou',"... Why is no one picking up the phone?")
+		sfxplay('se携帯電話のコール音')
+	elseif cl == 92 then
+		cw('Kashou',"... Just what is Shigure doing...?")
+	elseif cl == 93 then
+		sfxplay('se携帯を切る音')
+        cw('bl',"I hung up after trying to call my little sister.")
+	elseif cl == 94 then
+        cw('bl',"There was no way that Chocola and Vanilla could've gotten mixed in with the rest of the boxes in the first place.")
+	elseif cl == 95 then
+        cw('bl',"On the outside, catgirls look almost like humans.")
+	elseif cl == 96 then
+        cw('bl',"They can understand words and can talk just like us.")
+	elseif cl == 97 then
+        cw('bl',"But more than humans, catgirls were closer to normal cats.")
+	elseif cl == 98 then
+        cw('bl',"After all, catgirls had ears and tails just like cats do.")
+	elseif cl == 99 then
+        cw('bl',"They were genetically modified humanoid cats that were commonly referred to as \"catgirls.\"")
+	elseif cl == 100 then
+        cw('bl',"These days, catgirls fit into society...")
+	elseif cl == 101 then
+        cw('bl',"... as pets in families or partners to humans.")
+	elseif cl == 102 then
+        cw('bl',"My little sister really loves to dote on catgirls...")
+	elseif cl == 103 then
+        cw('bl',"... so our family has six including Chocola and Vanilla.")
+	elseif cl == 104 then
+        cw('bl',"In any case, they couldn't have mailed themselves all on their own.")
+	elseif cl == 105 then
+        cw('bl',"Mailing living things through the post would be impossible, for one thing.")
+	elseif cl == 106 then
+        cw('bl',"There's no way my parents would have helped with this either.")
+	elseif cl == 107 then
+        cw('bl',"Thus I could only guess that this was somehow Shigure's doing...")
+	elseif cl == 108 then
+        cw('Kashou',"... I see, so Shigure was an accomplice then.")
+	elseif cl == 109 then
+		audioUpdate('0')
+		bgUpdate('images/bk')
+		pause(2)
+	elseif cl == 110 then
+        cw('bl',"There's no way my parents would have helped with this either.")
+	elseif cl == 100 then
+        cw('bl',"There's no way my parents would have helped with this either.")
+	elseif cl == 100 then
+        cw('bl',"There's no way my parents would have helped with this either.")
 	end
 end

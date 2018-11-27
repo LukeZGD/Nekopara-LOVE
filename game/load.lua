@@ -35,6 +35,9 @@ function updateLoad()
 	elseif l_timer == 100 then
 		if love.filesystem.getInfo('settings.sav') then
 			loadsettings()
+			sfx_sys[1]:setVolume(settings.sfxvol)
+			sfx_sys[2]:setVolume(settings.sfxvol)
+			sfx_sys[3]:setVolume(settings.sfxvol)
 		else
 			savesettings()
 		end

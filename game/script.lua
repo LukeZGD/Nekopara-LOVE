@@ -3,9 +3,6 @@ local c_a = {}
 local c_a1 = {70,140,210}
 local tspd
 local tagtimer = 0
-local pchapter
-local aa
-local script_poemresponsesx = false
 
 function cw(p1, stext, tag)
 	if p1 == 'bl' then
@@ -78,12 +75,7 @@ function scriptCheck()
 	c_disp = {'','','',''}
 	textx = ''
 	loadstring('ch'..chapter..'script()')()
-end	
-
-function bl (say) return cw('bl',say) end
-function ks (say) return cw('ks',say) end
-function sy (say) return cw('sy',say) end
-function bn (say) return cw('bn',say) end
+end
 
 function pause(t)
 	textbox_enabled = false

@@ -42,7 +42,7 @@ function love.update(dt)
 		updateLoad(dt)
 	elseif state == 'splash' or state == 'title' then
 		updateSplash(dt)
-	elseif state == 'game' or state == 'newgame' then
+	elseif state == 'game' then
 		updateGame(dt)
 	end
 	if menu_enabled then
