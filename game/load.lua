@@ -8,8 +8,8 @@ function updateLoad()
 	--loading assets
 	if l_timer == 95 then
 		GenJyuuGothicX_Medium = lg.newFont('data.xp3/main/GenJyuuGothicX-Medium.ttf',22)
-		SourceHanSansCN_Bold = lg.newFont('data.xp3/main/SourceHanSansCN-Bold.otf',22)
-		lg.setFont(SourceHanSansCN_Bold)
+		--SourceHanSansCN_Bold = lg.newFont('data.xp3/main/SourceHanSansCN-Bold.otf',22)
+		lg.setFont(GenJyuuGothicX_Medium)
 		
 	elseif l_timer == 96 then
 		
@@ -30,7 +30,7 @@ function updateLoad()
 		ui.saveload_bg = lg.newImage('images/ui/saveload_bg.png')
 		ui.load_bg = lg.newImage('images/ui/load_bg.png')
 		ui.save_bg = lg.newImage('images/ui/save_bg.png')
-		ui.window = lg.newImage('images/ui/window.png')
+		ui.window = lg.newImage('data.xp3/uipsd/window@window__l%base.png')
 		
 	elseif l_timer == 100 then
 		if love.filesystem.getInfo('settings.sav') then

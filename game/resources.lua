@@ -16,7 +16,7 @@ function changeState(cstate,x)
 	
 	if cstate == 'splash' then
 		brandlogo = lg.newImage('data.xp3/image/brandlogo.png')
-		title_bg = lg.newImage('data.xp3/image/title_bg.png')
+		title_bg = lg.newImage('images/title_bg.png')
 		alpha = 0
 		splash_call = {}
 		if random_call == 1 then

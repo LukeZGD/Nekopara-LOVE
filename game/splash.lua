@@ -1,5 +1,3 @@
-local random_call = love.math.random(1, 6)
-local running
 local s_timer = 0
 
 function drawSplash()

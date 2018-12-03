@@ -1,5 +1,4 @@
 local skipspeed = 4
-local audiotell = 0
 local bgalpha = 255
 local cgalpha = 255
 
@@ -15,20 +14,16 @@ function drawGame()
 	lg.draw(cgch2,cgco.oldx,cgco.oldy)
 	
 	lg.setColor(255,255,255,alpha)
-	
 	drawTextBox()
-	lg.setFont(GenJyuuGothicX_Medium)
 	
 	lg.setColor(255,255,255,alpha)
 	lg.print(cl,5,690)
 	if autotimer > 0 then
-		lg.draw(gui_skip,0,27)
 		lg.setColor(255,255,255)
-		lg.print('Auto', 5, 35)
+		lg.print('Auto',5,35)
 	elseif autoskip > 0 then
-		lg.draw(gui_skip,0,27)
 		lg.setColor(255,255,255)
-		lg.print('Skipping', 5, 35)
+		lg.print('Skipping',5,35)
 	end
 	if menu_enabled then menu_draw() end
 end
@@ -91,13 +86,12 @@ function game_keypressed(key)
 		if autoskip < 1 then autoskip = 1
 		elseif autoskip > 0 then autoskip = 0 end
 		]]
-	elseif key == 'a' then 
-		autotimer = 0
+	elseif key == 'a' or key == 'l' or key == 'lbutton' then
 		cl = cl + 1 --next script
 		xaload = 0
 		collectgarbage()
 		collectgarbage()
-	elseif key == 'l' or key == 'lbutton' then
+	elseif key == 'r' or key == 'rbutton' then
 		scriptJump(cl)
 	end
 end
