@@ -1,9 +1,5 @@
-audio_ext = '.ogg'
-if isPSP then
-	audio_ext = '.mp3'
-end
-
 local random_call = love.math.random(1,7)
+local audio_bgmvolc = 1
 bgco = {x=0,y=0,oldx=0,oldy=0}
 cgco = {x=0,y=0,oldx=0,oldy=0}
 
@@ -36,6 +32,7 @@ function changeState(cstate,x)
 		end
 		
 	elseif cstate == 'title' then
+		random_call = love.math.random(1,7)
 		if random_call == 1 then
 			splash_call[2] = love.audio.newSource('voice.xp3/コール音声/NEKOPARA/azu_call_0003.ogg','static')
 		elseif random_call == 2 then
@@ -57,7 +54,6 @@ function changeState(cstate,x)
 		if audio1 ~= 'bgm_title' then
 			audioUpdate('bgm_title')
 		end
-		random_call = love.math.random(1,7)
 		
 	elseif cstate == 'game' and x == 1 then --new game
 		cl = 1
@@ -93,7 +89,7 @@ function timerCheck()
 	xaload = xaload + 1
 end
 
-function bgUpdate(bgx, type, arg1, arg2) --background changes
+function bgUpdate(bgx,type,arg1,arg2,arg3) --background changes
 	if xaload == 0 or type == 'forceload' then
 		if autoskip == 0 and type ~= 'forceload' then bgch2 = bgch end
 		bgch = nil
@@ -104,11 +100,12 @@ function bgUpdate(bgx, type, arg1, arg2) --background changes
 		bgco.oldy = bgco.y
 		bgco.x = arg1
 		bgco.y = arg2
+		bgco.scale = arg3
 	end
 	bg1 = bgx
 end
 
-function cgUpdate(cgx, type, arg1, arg2) --cg changes
+function cgUpdate(cgx,type,arg1,arg2,arg3) --cg changes
 	if cg1 ~= cgx or type == 'forceload' then
 		if autoskip == 0 and type ~= 'forceload' then cgch2 = cgch end
 		cgch = nil
@@ -117,6 +114,7 @@ function cgUpdate(cgx, type, arg1, arg2) --cg changes
 	if type == 'cgco' then
 		arg1 = cgco.x
 		arg2 = cgco.y
+		arg3 = cgco.scale
 	end
 	cg1 = cgx
 end
@@ -126,14 +124,16 @@ function audioUpdate(audiox, arg1) --audio changes
 		if audio_bgm then audio_bgm:stop() end
 		audio_bgm = nil
 		if audiox ~= '' and audiox ~= '0' then
-			audio_bgm = love.audio.newSource('data.xp3/bgm/'..audiox..audio_ext, 'stream')
+			audio_bgmvolc = nil
+			audio_bgm = love.audio.newSource('data.xp3/bgm/'..audiox..'.ogg', 'stream')
 			audio_bgm:setLooping(true)
 			audio_bgm:setVolume(settings.bgmvol)
 			audio_bgm:play()
 		end
 		audio1 = audiox
 	elseif audiox == 'volchange' then
-		audio_bgm:setVolume(settings.bgmvol*arg1)
+		audio_bgmvolc = arg1
+		audio_bgm:setVolume((settings.bgmvol*audio_bgmvolc)/100)
 	end
 end
 
@@ -142,7 +142,7 @@ function sfxplay(sfx) --sfx stuff
 		if sfxp then sfxp:stop() end
 		sfxp = nil
 		if sfx ~= '' then
-			sfxp = love.audio.newSource('data.xp3/sound/'..sfx..audio_ext, 'static')
+			sfxp = love.audio.newSource('data.xp3/sound/'..sfx..'.ogg', 'static')
 		end
 		sfxp:setVolume(settings.sfxvol)
 		sfxp:play()
@@ -154,9 +154,20 @@ function voiceplay(svoice)
 		if voice then voice:stop() end
 		voice = nil
 		if svoice ~= '' then
-			voice = love.audio.newSource('voice.xp3/'..svoice..audio_ext, 'static')
+			voice = love.audio.newSource('voice.xp3/'..svoice..'.ogg', 'static')
 		end
 		voice:setVolume(settings.vocvol)
 		voice:play()
 	end
+end
+
+function game_setvolume()
+	if audio_bgm then
+		audio_bgm:setVolume((settings.bgmvol*audio_bgmvolc)/100)
+	end
+	sfx_sys[1]:setVolume(settings.sfxvol/100)
+	--sfx_sys[2]:setVolume(settings.sfxvol/100)
+	sfx_sys[3]:setVolume(settings.sfxvol/100)
+	if sfxp then sfxp:setVolume(settings.sfxvol) end
+	if voice then voice:setVolume(settings.vocvol) end
 end

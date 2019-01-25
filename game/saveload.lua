@@ -16,7 +16,8 @@ audio1='"..audio1.."'\
 cg1='"..cg1.."'\
 ct='"..ct.."'\
 chapter="..chapter.."\
-bgco={x="..bgco.x..",y="..bgco.y.."}"
+bgco={x="..bgco.x..",y="..bgco.y..",scale="..bgco.scale.."}\
+cgco={x="..cgco.x..",y="..cgco.y..",scale="..cgco.scale.."}"
 	
 	love.filesystem.write("save"..savenumber..".sav", savedata)
 end

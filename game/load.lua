@@ -15,9 +15,9 @@ function updateLoad()
 		
 	elseif l_timer == 97 then
 		sfx_sys = {}
-		sfx_sys[1] = love.audio.newSource('data.xp3/sound/sysse/sysse_ok'..audio_ext, 'static')
-		sfx_sys[2] = love.audio.newSource('data.xp3/sound/sysse/sysse_select'..audio_ext, 'static')
-		sfx_sys[3] = love.audio.newSource('data.xp3/sound/sysse/sysse_cancel'..audio_ext, 'static')
+		sfx_sys[1] = love.audio.newSource('data.xp3/sound/sysse/sysse_ok.ogg', 'static')
+		--sfx_sys[2] = love.audio.newSource('data.xp3/sound/sysse/sysse_select.ogg', 'static')
+		sfx_sys[3] = love.audio.newSource('data.xp3/sound/sysse/sysse_cancel.ogg', 'static')
 		
 	elseif l_timer == 98 then
 		ui = {}
@@ -30,14 +30,12 @@ function updateLoad()
 		ui.saveload_bg = lg.newImage('images/ui/saveload_bg.png')
 		ui.load_bg = lg.newImage('images/ui/load_bg.png')
 		ui.save_bg = lg.newImage('images/ui/save_bg.png')
-		ui.window = lg.newImage('data.xp3/uipsd/window@window__l%base.png')
+		ui.window = lg.newImage('images/ui/window.png')
 		
 	elseif l_timer == 100 then
 		if love.filesystem.getInfo('settings.sav') then
 			loadsettings()
-			sfx_sys[1]:setVolume(settings.sfxvol)
-			sfx_sys[2]:setVolume(settings.sfxvol)
-			sfx_sys[3]:setVolume(settings.sfxvol)
+			game_setvolume()
 		else
 			savesettings()
 		end
