@@ -1,4 +1,4 @@
-# Nekopara1-LV
+# Nekopara-Vita
 
 This is an attempt of "porting" Nekopara Vol. 1 to LOVE2D, so it will run on PS Vita with LOVE-OneLua.
 

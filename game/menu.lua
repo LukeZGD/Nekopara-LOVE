@@ -214,7 +214,6 @@ function menu_confirm()
 	elseif menu_type == 'pause' then --pause menu options
 		menu_previous = menu_type
 		if m_selected == 2 then
-			--menu_history = {cl,ct}
 			--menu_enable('history')
 		elseif m_selected == 3 then
 			pagenum = 1
@@ -252,12 +251,7 @@ function menu_confirm()
 			menu_keypressed('left')
 		elseif m_selected == 7 then
 			savesettings()
-			audio_bgm:setVolume(settings.bgmvol)
-			sfx_sys[1]:setVolume(settings.sfxvol)
-			sfx_sys[2]:setVolume(settings.sfxvol)
-			sfx_sys[3]:setVolume(settings.sfxvol)
-			if sfxp then sfxp:setVolume(settings.sfxvol) end
-			if voice then voice:setVolume(settings.vocvol) end
+			game_setvolume()
 			menu_enable(menu_previous)
 		end
 	end
@@ -294,11 +288,6 @@ function menu_keypressed(key)
 		
 	elseif key == 'b' then
 		sfx_sys[3]:play()
-		if menu_history then
-			cl = menu_history[1]
-			ct = menu_history[2]
-			menu_history = nil
-		end
 		if menu_type == 'pause' then
 			menu_fadeout = true
 		elseif menu_type ~= 'title' and menu_type ~= 'pause' then
@@ -327,10 +316,6 @@ function menu_keypressed(key)
 				settings.vocvol = settings.vocvol - 0.1
 				
 			end
-		elseif menu_type == 'history' then
-			if cl > 1 and cl >= (menu_history[1] - 50) then
-				cl = cl - 1
-			end
 		end
 		
 	elseif key == 'right' then
@@ -349,11 +334,6 @@ function menu_keypressed(key)
 				
 			elseif cpick == 'Voice Volume' and settings.vocvol < 1 then
 				settings.vocvol = settings.vocvol + 0.1
-				
-			end
-		elseif menu_type == 'history' then
-			if cl < menu_history[1] then
-				cl = cl + 1
 			end
 		end
 	

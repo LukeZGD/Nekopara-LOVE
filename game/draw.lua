@@ -1,5 +1,12 @@
 lg = love.graphics
-local ypsc={585,615,645,675}
+local ypsc = {585,615,645,675}
+
+changeX = {}
+for i = 1, 7 do
+	changeX[i] = {x=0,y=0,z=0}
+end
+unitimer = 0
+uniduration = 0.25
 
 --compatiblity for LOVE 11 and above
 local lgsetColor = lg.setColor
@@ -24,6 +31,17 @@ function lg.draw(drawable, ...)
 	end
 end
 
+function outlineText(text,x,y,type,arg1)
+	local addm = 1.5
+	lg.setColor(67,33,0,alpha)
+	lg.print(text,x-addm,y)
+	lg.print(text,x,y-addm)
+	lg.print(text,x+addm,y)
+	lg.print(text,x,y+addm)
+	lg.setColor(255,255,255,alpha)
+	lg.print(text,x,y)
+end
+
 function dripText(text,charactersPerSecond,startTime)
 	currentTime = love.timer.getTime()
 	if (currentTime <= startTime) or startTime == 0 then return '' end
@@ -35,6 +53,25 @@ end
 function easeQuadOut(t,b,c,d)
 	t = t / d
 	return -(c) * t*(t-2) + b
+end
+
+function easeQuadInOut(t,b,c,d)
+	t = t/(d/2)
+	if (t < 1) then
+		return c/2*t*t + b
+	else
+		return -c/2 * ((t-1) * (t-3) - 1) + b
+	end
+end
+	
+function easeCubicInOut(t,b,c,d)
+	t = t/(d/2)
+	if (t < 1) then
+		return c/2*t*t*t + b
+	else
+		t = t - 2
+		return c/2*(t*t*t + 2) + b
+	end
 end
 
 function fadeOut(x)
@@ -50,17 +87,78 @@ function drawTextBox()
 	if textbox_enabled and not menu_enabled and c_disp then
 		lg.setColor(255,255,255,alpha/2.5)
 		lg.draw(ui.window,0,520)
-		--shadow
-		lg.setColor(67,33,0,alpha)
-		lg.print(ct,272,532)
+		outlineText(ct,270,530)
 		for i = 1, 4 do
-			lg.print(c_disp[i],272,ypsc[i]+2)
+			outlineText(c_disp[i],270,ypsc[i])
 		end
-		--main text
-		lg.setColor(250,250,250,alpha)
-		lg.print(ct,270,530)
-		for i = 1, 4 do
-			lg.print(c_disp[i],270,ypsc[i])
+	end
+end
+
+function setCharacter(char)
+	local set
+	local chset
+	local num
+	if char == 'chocola' then
+		num = 1
+	elseif char == 'vanilla' then
+		num = 2
+	elseif char == 'azuki' then
+		num = 3
+	elseif char == 'maple' then
+		num = 4
+	elseif char == 'cinammon' then
+		num = 5
+	elseif char == 'coconut' then
+		num = 6
+	elseif char == 'shigure' then
+		num = 7
+	end
+	set = save_Set[num]
+	chset = changeX[num]
+	return set, chset
+end
+
+function updateCharacter(char,a,b,px,py,sx)
+	local set, chset = setCharacter(char)
+	
+	if not b then b = '' end
+	if not sx then sx = 1 end
+	set.a = a
+	set.b = b
+	set.sx = sx
+	
+	if px and xaload == 0 then
+		chset.x = set.x
+		chset.y = px*3.2
+		if chset.x < chset.y then
+			chset.z = chset.y - chset.x
+		elseif chset.x > chset.y then
+			chset.z = chset.x - chset.y
+		else
+			chset.z = 0
+		end
+	end
+	if py then set.y = py end
+end
+
+function hideCharacter(char)
+	local set, chset = setCharacter(char)
+
+	if xaload == 0 then
+		chset.x = set.x
+		chset.y = -675
+		chset.z = chset.x - chset.y
+	end
+end
+
+function drawCharacters()
+	for i, j in ipairs(save_Set) do
+		if j.a and j.a == '' then
+			j.draw = nil
+		elseif j.a and j.a ~= '' and not j.draw then
+			j.draw = lg.newImage(j.a)
+		elseif j.draw then
+			lg.draw(j.draw,j.x,j.y)
 		end
 	end
 end
