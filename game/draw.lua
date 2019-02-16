@@ -150,3 +150,15 @@ function hideCharacter(char)
 		chset.z = chset.x - chset.y
 	end
 end
+
+function drawCharacters()
+	for i, j in ipairs(save_Set) do
+		if j.a and j.a == '' then
+			j.draw = nil
+		elseif j.a and j.a ~= '' and not j.draw then
+			j.draw = lg.newImage(j.a)
+		elseif j.draw then
+			lg.draw(j.draw,j.x,j.y)
+		end
+	end
+end

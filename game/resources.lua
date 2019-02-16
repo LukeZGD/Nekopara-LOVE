@@ -1,7 +1,27 @@
-local random_call = love.math.random(1,7)
 local audio_bgmvolc = 1
-bgco = {x=0,y=0,oldx=0,oldy=0}
-cgco = {x=0,y=0,oldx=0,oldy=0}
+bgco = {x=0,y=0,oldx=0,oldy=0,scale=1}
+cgco = {x=0,y=0,oldx=0,oldy=0,scale=1}
+
+function getrandom_call()
+	local random_call = love.math.random(1,7)
+	local getcall
+	if random_call == 1 then
+		getcall = "azu"
+	elseif random_call == 2 then
+		getcall = "bani"
+	elseif random_call == 3 then
+		getcall = "koko"
+	elseif random_call == 4 then
+		getcall = "mei"
+	elseif random_call == 5 then
+		getcall = "shina"
+	elseif random_call == 6 then
+		getcall = "sigu"
+	elseif random_call == 7 then
+		getcall = "syo"
+	end
+	return getcall
+end
 
 function changeState(cstate,x)
 	menu_alpha = 0
@@ -10,44 +30,17 @@ function changeState(cstate,x)
 		require(cstate)
 	end
 	
+	local spcall = getrandom_call()
 	if cstate == 'splash' then
 		brandlogo = lg.newImage('data.xp3/image/brandlogo.png')
 		title_bg = lg.newImage('images/title_bg.png')
 		alpha = 0
 		splash_call = {}
-		if random_call == 1 then
-			splash_call[1] = love.audio.newSource('voice.xp3/コール音声/NEKO_WORKs/azu_call_0001.ogg','static')
-		elseif random_call == 2 then
-			splash_call[1] = love.audio.newSource('voice.xp3/コール音声/NEKO_WORKs/bani_call_0001.ogg','static')
-		elseif random_call == 3 then
-			splash_call[1] = love.audio.newSource('voice.xp3/コール音声/NEKO_WORKs/koko_call_0001.ogg','static')
-		elseif random_call == 4 then
-			splash_call[1] = love.audio.newSource('voice.xp3/コール音声/NEKO_WORKs/mei_call_0001.ogg','static')
-		elseif random_call == 5 then
-			splash_call[1] = love.audio.newSource('voice.xp3/コール音声/NEKO_WORKs/shina_call_0001.ogg','static')
-		elseif random_call == 6 then
-			splash_call[1] = love.audio.newSource('voice.xp3/コール音声/NEKO_WORKs/sigu_call_0001.ogg','static')
-		elseif random_call == 7 then
-			splash_call[1] = love.audio.newSource('voice.xp3/コール音声/NEKO_WORKs/syo_call_0001.ogg','static')
-		end
+		splash_call[1] = love.audio.newSource('voice.xp3/コール音声/NEKO_WORKs/'..spcall..'_call_0001.ogg','static')
+		
 		
 	elseif cstate == 'title' then
-		random_call = love.math.random(1,7)
-		if random_call == 1 then
-			splash_call[2] = love.audio.newSource('voice.xp3/コール音声/NEKOPARA/azu_call_0003.ogg','static')
-		elseif random_call == 2 then
-			splash_call[2] = love.audio.newSource('voice.xp3/コール音声/NEKOPARA/bani_call_0003.ogg','static')
-		elseif random_call == 3 then
-			splash_call[2] = love.audio.newSource('voice.xp3/コール音声/NEKOPARA/koko_call_0003.ogg','static')
-		elseif random_call == 4 then
-			splash_call[2] = love.audio.newSource('voice.xp3/コール音声/NEKOPARA/mei_call_0003.ogg','static')
-		elseif random_call == 5 then
-			splash_call[2] = love.audio.newSource('voice.xp3/コール音声/NEKOPARA/shina_call_0003.ogg','static')
-		elseif random_call == 6 then
-			splash_call[2] = love.audio.newSource('voice.xp3/コール音声/NEKOPARA/sigu_call_0003.ogg','static')
-		elseif random_call == 7 then
-			splash_call[2] = love.audio.newSource('voice.xp3/コール音声/NEKOPARA/syo_call_0003.ogg','static')
-		end
+		splash_call[2] = love.audio.newSource('voice.xp3/コール音声/NEKOPARA/'..spcall..'_call_0003.ogg','static')
 		alpha = 0
 		menu_enable('title')
 		splash_call[2]:play()
@@ -96,6 +89,8 @@ function bgUpdate(bgx,type,arg1,arg2,arg3) --background changes
 		bgch = lg.newImage(bgx..'.png')
 	end
 	if type == 'bgco' then
+		if not arg2 then arg2 = arg1 end
+		if not arg3 then arg3 = 1 end
 		bgco.oldx = bgco.x
 		bgco.oldy = bgco.y
 		bgco.x = arg1

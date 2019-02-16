@@ -13,6 +13,8 @@ function drawGame()
 	lg.setColor(255,255,255,cgalpha)
 	lg.draw(cgch2,cgco.oldx,cgco.oldy)
 	
+	drawCharacters()
+	
 	lg.setColor(255,255,255,alpha)
 	drawTextBox()
 	
