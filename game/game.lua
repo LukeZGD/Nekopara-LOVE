@@ -1,6 +1,7 @@
 local skipspeed = 4
 local bgalpha = 255
 local cgalpha = 255
+local textboxd = true
 
 function drawGame()
 	lg.setBackgroundColor(0,0,0)
@@ -15,14 +16,25 @@ function drawGame()
 	
 	drawCharacters()
 	
-	lg.setColor(255,255,255,alpha)
-	drawTextBox()
+	if textboxd then
+		drawTextBox()
+	end
 	
 	outlineText(cl,5,690)
 	if autotimer > 0 then
-		outlineText('Auto',5,35)
+		outlineText('Auto-Mode On',5,35)
 	elseif autoskip > 0 then
-		outlineText('Skipping',5,35)
+		local skiptext
+		if sectimer >= 0.75 then
+			skiptext = 'Skipping >>>'
+		elseif sectimer >= 0.5 then
+			skiptext = 'Skipping >>'
+		elseif sectimer >= 0.25 then
+			skiptext = 'Skipping >'
+		else
+			skiptext = 'Skipping'
+		end 
+		outlineText(skiptext,5,35)
 	end
 	if menu_enabled then menu_draw() end
 end
@@ -82,9 +94,12 @@ function game_keypressed(key)
 	elseif key == 'a' or key == 'l' or key == 'lbutton' then
 		cl = cl + 1 --next script
 		xaload = 0
+		unitimer = 0
 		collectgarbage()
 		collectgarbage()
 	elseif key == 'r' or key == 'rbutton' then
 		scriptJump(cl)
+	elseif key == 'select' or key == 'z' then
+		textboxd = not textboxd
 	end
 end

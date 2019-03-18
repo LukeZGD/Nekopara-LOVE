@@ -1,5 +1,4 @@
 lg = love.graphics
-local ypsc = {585,615,645,675}
 
 changeX = {}
 for i = 1, 7 do
@@ -88,9 +87,7 @@ function drawTextBox()
 		lg.setColor(255,255,255,alpha/2.5)
 		lg.draw(ui.window,0,520)
 		outlineText(ct,270,530)
-		for i = 1, 4 do
-			outlineText(c_disp[i],270,ypsc[i])
-		end
+		outlineText(c_disp,270,585)
 	end
 end
 

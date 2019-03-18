@@ -10,6 +10,7 @@ local chch
 local cpick
 local menu_fadeout
 local menu_mtimer = 0
+local history_scr = -39
 menu_alpha = 0
 
 function menu_enable(m)
@@ -34,6 +35,7 @@ function menu_enable(m)
 		end
 	end
 	
+	menutext = ''
 	if menu_type == 'mainyesno' then
 		menutext = 'Are you sure you want to return to the title screen?'
 		itemnames = {'Yes','No'}
@@ -43,19 +45,17 @@ function menu_enable(m)
 		itemnames = {'Yes','No'}
 	
 	elseif menu_type == 'title' then
-		menutext = ''
 		itemnames = {'','','','',''}
 		
 	elseif menu_type == 'settings' then
-		menutext = ''
 		itemnames = {'Text Speed','Auto-Mode Speed','BGM Volume','SFX Volume','Voice Volume','Save Settings'}
 	
 	elseif menu_type == 'pause' then
 		menutext = 'Game Menu'
 		itemnames = {'Backlog','Save','Load','Title','Config','Exit','Return'}
 		
-	else
-		menutext = ''
+	elseif menu_type == 'history' then
+		itemnames = {}
 	end
 	
 	if menu_type == 'choice' then
@@ -90,15 +90,15 @@ function menu_draw()
 		lg.setColor(255,255,255,menu_alpha)
 		if menu_type == 'settings' then
 			lg.draw(ui.config_bg)
-		elseif menu_type == 'savegame' or menu_type == 'loadgame' then
-			if menu_type == 'savegame' then
-				lg.draw(ui.save_bg)
-			else
-				lg.draw(ui.load_bg)
-			end
+		elseif menu_type == 'savegame' then
+			lg.draw(ui.save_bg)
+		elseif menu_type == 'loadgame' then
+			lg.draw(ui.load_bg)
 		end
 		lg.setColor(0,0,0,menu_alpha)
-		lg.print('>',cX,cY)
+		if itemnames[1] then
+			lg.print('>',cX,cY)
+		end
 		lg.print(menutext,140,90)
 	end
 	
@@ -153,7 +153,7 @@ function menu_draw()
 		
 	elseif menu_type == 'history' then
 		for i = 1, #history do
-			lg.print(history[i],400,3600+(history_scr*75)-(i*120))
+			lg.print(history[i],270,3600+(history_scr*75)-(i*120))
 		end
 	end
 end
@@ -168,6 +168,14 @@ function menu_update(dt)
 		end
 	else
 		menu_alpha = math.min(menu_alpha + dt*1000, 255)
+	end
+	
+	if menu_type == 'history' then
+		if love.keyboard.isDown('down') and history_scr > -39 then
+			history_scr = history_scr - 0.2
+		elseif love.keyboard.isDown('up') and history_scr < 0 then
+			history_scr = history_scr + 0.2
+		end
 	end
 end
 
@@ -206,7 +214,7 @@ function menu_confirm()
 	elseif menu_type == 'pause' then --pause menu options
 		menu_previous = menu_type
 		if m_selected == 2 then
-			--menu_enable('history')
+			menu_enable('history')
 		elseif m_selected == 3 then
 			pagenum = 1
 			menu_enable('savegame')
@@ -280,6 +288,7 @@ function menu_keypressed(key)
 		
 	elseif key == 'b' then
 		sfx_sys[3]:play()
+		history_scr = -39
 		if menu_type == 'pause' then
 			menu_fadeout = true
 		elseif menu_type ~= 'title' and menu_type ~= 'pause' then
@@ -299,13 +308,13 @@ function menu_keypressed(key)
 				settings.autospd = settings.autospd - 1
 				
 			elseif cpick == 'BGM Volume' and settings.bgmvol > 0 then
-				settings.bgmvol = settings.bgmvol - 0.1
+				settings.bgmvol = settings.bgmvol - 10
 				
 			elseif cpick == 'SFX Volume' and settings.sfxvol > 0 then
-				settings.sfxvol = settings.sfxvol - 0.1
+				settings.sfxvol = settings.sfxvol - 10
 				
 			elseif cpick == 'Voice Volume' and settings.vocvol > 0 then
-				settings.vocvol = settings.vocvol - 0.1
+				settings.vocvol = settings.vocvol - 10
 				
 			end
 		end
@@ -319,13 +328,13 @@ function menu_keypressed(key)
 				settings.autospd = settings.autospd + 1
 				
 			elseif cpick == 'BGM Volume' and settings.bgmvol < 1 then
-				settings.bgmvol = settings.bgmvol + 0.1
+				settings.bgmvol = settings.bgmvol + 10
 				
 			elseif cpick == 'SFX Volume' and settings.sfxvol < 1 then
-				settings.sfxvol = settings.sfxvol + 0.1
+				settings.sfxvol = settings.sfxvol + 10
 				
 			elseif cpick == 'Voice Volume' and settings.vocvol < 1 then
-				settings.vocvol = settings.vocvol + 0.1
+				settings.vocvol = settings.vocvol + 10
 			end
 		end
 	
