@@ -98,19 +98,19 @@ function setCharacter(char)
 	local set
 	local chset
 	local num
-	if char == 'chocola' then
+	if char == 'syo' then
 		num = 1
-	elseif char == 'vanilla' then
+	elseif char == 'bani' then
 		num = 2
-	elseif char == 'azuki' then
+	elseif char == 'azu' then
 		num = 3
-	elseif char == 'maple' then
+	elseif char == 'mei' then
 		num = 4
-	elseif char == 'cinammon' then
+	elseif char == 'shina' then
 		num = 5
-	elseif char == 'coconut' then
+	elseif char == 'koko' then
 		num = 6
-	elseif char == 'shigure' then
+	elseif char == 'sigu' then
 		num = 7
 	end
 	set = save_Set[num]
@@ -128,6 +128,8 @@ function updateCharacter(char,a,b,px,py,sx)
 	set.sx = sx
 	
 	if px and xaload == 0 then
+		set.x = px
+		--[[
 		chset.x = set.x
 		chset.y = px*3.2
 		if chset.x < chset.y then
@@ -137,6 +139,7 @@ function updateCharacter(char,a,b,px,py,sx)
 		else
 			chset.z = 0
 		end
+		]]
 	end
 	if py then set.y = py end
 end
@@ -145,9 +148,12 @@ function hideCharacter(char)
 	local set, chset = setCharacter(char)
 
 	if xaload == 0 then
+		set.x = -675
+		--[[
 		chset.x = set.x
 		chset.y = -675
 		chset.z = chset.x - chset.y
+		]]
 	end
 end
 

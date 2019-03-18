@@ -18,14 +18,11 @@ function drawGame()
 	lg.setColor(255,255,255,alpha)
 	drawTextBox()
 	
-	lg.setColor(255,255,255,alpha)
-	lg.print(cl,5,690)
+	outlineText(cl,5,690)
 	if autotimer > 0 then
-		lg.setColor(255,255,255)
-		lg.print('Auto',5,35)
+		outlineText('Auto',5,35)
 	elseif autoskip > 0 then
-		lg.setColor(255,255,255)
-		lg.print('Skipping',5,35)
+		outlineText('Skipping',5,35)
 	end
 	if menu_enabled then menu_draw() end
 end
@@ -64,11 +61,7 @@ function updateGame(dt)
 		if autoskip > 0 and autoskip < skipspeed then
 			autoskip = autoskip + 1
 		elseif autoskip >= skipspeed then
-			autotimer = 0
-			cl = cl + 1
-			xaload = 0
-			collectgarbage()
-			collectgarbage()
+			game_keypressed('a')
 			autoskip = 1
 		end
 	end
@@ -84,10 +77,8 @@ function game_keypressed(key)
 		if autotimer == 0 then autotimer = 0.01 else autotimer = 0 end		
 	elseif key == 'x' then
 		sfx_sys[1]:play()
-		--[[
 		if autoskip < 1 then autoskip = 1
 		elseif autoskip > 0 then autoskip = 0 end
-		]]
 	elseif key == 'a' or key == 'l' or key == 'lbutton' then
 		cl = cl + 1 --next script
 		xaload = 0

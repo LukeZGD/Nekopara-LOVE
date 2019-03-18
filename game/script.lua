@@ -1,8 +1,18 @@
 local stext
-local c_a = {}
-local c_a1 = {70,140,210}
 local tspd
 local tagtimer = 0
+history = {}
+
+function wrap(str, limit)
+	local here = 1
+	local function check(sp, st, word, fi)
+		if fi - here > limit then
+			here = st
+			return "\n"..word
+		end
+	end
+	return str:gsub("(%s+)()(%S+)()", check)
+end
 
 function cw(p1, stext, tag)
 	if p1 == 'bl' then
@@ -21,7 +31,9 @@ function cw(p1, stext, tag)
 	end
 	
 	--text drip for scripts
-	if tag == 'fast' then
+	if autoskip > 0 then
+		tspd = 10000
+	elseif tag == 'fast' then
 		tspd = 250
 	elseif tag == 'slow' then
 		tspd = 25
@@ -29,22 +41,20 @@ function cw(p1, stext, tag)
 		tspd = settings.textspd
 	end
 	textx = dripText(stext,tspd,myTextStartTime)
+	c_disp = wrap(textx,70)
 	
-	if textx == stext then gui_ctc_t = true
-	else gui_ctc_t = false end
-	
-	--word wrap
-	slen = string.len(textx)
-	
-	for i = 1, 3 do
-		c_a[i] = string.find(stext, '%s', c_a1[i])
-		if c_a[i] == nil then c_a[i] = c_a1[i] + 3 end
-	end
-	
-	c_disp[1] = string.sub(textx, 1, c_a[1])
-	for i = 2, 4 do
-		if slen >= c_a[i-1] then
-			c_disp[i] = string.sub(textx, c_a[i-1]+1, c_a[i])
+	local temptext = wrap(stext,70)
+	local temptext2 = ct..': '..temptext
+	if history[1] ~= temptext and history[1] ~= temptext2 then
+		for i = 30, 1, -1 do
+			history[i] = history[i-1]
+		end
+		if style_edited then
+			history[1] = ''
+		elseif ct == '' then
+			history[1] = temptext
+		else
+			history[1] = temptext2
 		end
 	end
 	

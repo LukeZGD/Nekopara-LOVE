@@ -113,7 +113,7 @@ function ch1script()
 		pause(1.5)
 	elseif cl == 48 then
 		cw('Box',"Achoo!!")
-		audioUpdate('volchange',0.1)
+		audioUpdate('volchange',10)
 		voiceplay('ショコラ/syo_0001')
 	elseif cl == 49 then
 		bgUpdate('evimage.xp3/CG01b','bgco',0,-350)
@@ -194,7 +194,7 @@ function ch1script()
 		bgUpdate('evimage.xp3/CG01e','bgco',0,-110)
 	elseif cl == 74 then
 		sfxplay("seガタッと物音")
-		audioUpdate('volchange',0.2)
+		audioUpdate('volchange',10)
 		cw('Box2',"Achee!!")
 		voiceplay('バニラ/bani_0001')
 	elseif cl == 75 then
@@ -210,7 +210,7 @@ function ch1script()
 		bgUpdate('evimage.xp3/CG01e','bgco',-220,-150)
 		pause(2)
 	elseif cl == 79 then
-		audioUpdate('volchange',1)
+		audioUpdate('volchange',100)
 		bgUpdate('evimage.xp3/CG01f','bgco',-220,-150)
 		cw('Vanilla',"Long time no see, Master.")
 		voiceplay('バニラ/bani_0003')

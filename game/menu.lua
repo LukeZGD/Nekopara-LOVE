@@ -125,7 +125,7 @@ function menu_draw()
 			lg.print('(>)',460,360)
 		end
 		lg.print('Press (<) and (>) to change settings.',140,580)
-		
+	
 	elseif menu_type == 'savegame' or menu_type == 'loadgame' then
 		lg.print('Page '..pagenum..' of 10 (<L - R>)',160,90)
 		for i = 1, 6 do
@@ -152,16 +152,8 @@ function menu_draw()
 		lg.print(keys[4]..' - Enter Game Menu',160,250)
 		
 	elseif menu_type == 'history' then
-		lg.setColor(0,0,0)
-		lg.print(cl,160,120)
-		local c_disp_y = {185,215,245,275}
-		lg.print(ct,250,150)
-		if c_disp and global_os == 'LOVE-OneLua' then
-			for i = 1, 4 do
-				lg.print(c_disp[i],250,c_disp_y[i])
-			end
-		else
-			lg.printf(textx,250,185,775)
+		for i = 1, #history do
+			lg.print(history[i],400,3600+(history_scr*75)-(i*120))
 		end
 	end
 end
