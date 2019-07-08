@@ -16,7 +16,7 @@ function love.load()
 	
 	--os detection
 	global_os, g_system = love.system.getOS()
-	if g_system ~= 'Switch' and global_os ~= 'LOVE-OneLua' then
+	if g_system ~= 'Switch' and global_os ~= 'LOVE-WrapLua' then
 		love.window.setMode(1280, 720)
 		love.window.setTitle('Nekopara Vol. 1')
 		love.keyboard.setTextInput(false)

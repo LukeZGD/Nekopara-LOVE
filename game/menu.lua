@@ -139,7 +139,7 @@ function menu_draw()
 		
 	elseif menu_type == 'help' then
 		local keys = {}
-		if global_os == 'LOVE-OneLua' then
+		if global_os == 'LOVE-WrapLua' then
 			keys = {'Cross','Circle','Square','Triangle'}
 		else
 			keys = {'A','B','X','Y'}

@@ -39,7 +39,7 @@ end
 
 function loadgame(x)
 	local savfile
-	if global_os == 'LOVE-OneLua' then
+	if global_os == 'LOVE-WrapLua' then
 		love.filesystem.load("save"..savenumber..".sav")
 	else
 		savfile = loadstring(love.filesystem.read("save"..savenumber..".sav"))
@@ -53,7 +53,7 @@ function savesettings()
 end
 
 function loadsettings()
-	if global_os == 'LOVE-OneLua' then
+	if global_os == 'LOVE-WrapLua' then
 		love.filesystem.load('settings.sav')
 	else
 		local settingsfile = loadstring(love.filesystem.read('settings.sav'))
